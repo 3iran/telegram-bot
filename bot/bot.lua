@@ -274,6 +274,31 @@ function load_plugins()
   end
 end
 
+
+-- custom add
+function load_data(filename)
+
+	local f = io.open(filename)
+	if not f then
+		return {}
+	end
+	local s = f:read('*all')
+	f:close()
+	local data = JSON.decode(s)
+
+	return data
+
+end
+
+function save_data(filename, data)
+
+	local s = JSON.encode(data)
+	local f = io.open(filename, 'w')
+	f:write(s)
+	f:close()
+
+end
+
 -- Call and postpone execution for cron plugins
 function cron_plugins()
 
